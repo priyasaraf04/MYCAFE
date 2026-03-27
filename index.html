@@ -1,0 +1,593 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><i>SHUDDHAM BHOJ|  Cafe & Restaurent </i></title>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary-color: #333; 
+            --secondary-color: #d36b46; /* Orange/Rust accent from your image */
+            --bg-color: #FCF9F2; /* Light paper color */
+            --text-color: #444;
+            --success-color: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; font-family: 'Segoe UI', Tahoma, sans-serif; }
+
+        /* --- Header & Navigation --- */
+        header {
+            background-color: #be522b; color: white; padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-size: 1.8rem; font-weight: bold; color: var(--secondary-color); font-family: 'Georgia', serif; }
+        .nav-container { display: flex; align-items: center; gap: 30px; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+        nav ul li a:hover { color: var(--secondary-color); }
+        .cart-btn {
+            background-color: var(--secondary-color); color: white;
+            border: none; padding: 8px 15px; font-size: 1rem; font-weight: bold;
+            border-radius: 5px; cursor: pointer; transition: 0.3s;
+        }
+        .cart-btn:hover { background-color: #b55a39; }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), image(FRONT.png) center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 0 20px;
+        }
+        #home h1 { font-size: 4rem; margin-bottom: 1rem; color: var(--secondary-color); font-family: 'Georgia', serif; }
+        #home p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; }
+        .hero-btn {
+            padding: 12px 30px; background-color: var(--secondary-color); color: white;
+            text-decoration: none; font-size: 1.1rem; font-weight: bold; border-radius: 5px; transition: 0.3s;
+        }
+        .hero-btn:hover { background-color: #b55a39; }
+
+        /* --- Search Bar --- */
+        .search-container { padding: 4rem 5% 1rem; text-align: center; }
+        #search-bar {
+            width: 100%; max-width: 500px; padding: 12px 20px; font-size: 1rem;
+            border: 1px solid #ccc; border-radius: 25px; outline: none; transition: 0.3s;
+        }
+        #search-bar:focus { border-color: var(--secondary-color); box-shadow: 0 0 8px rgba(211, 107, 70, 0.3); }
+        /* menu section */
+        .menu-section{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:40px;
+padding:80px;
+background: linear-gradient(to right,#ff9966,#ff5e62);
+}
+
+.cards{
+display:flex;
+gap:20px;
+}
+
+.card{
+background:white;
+width:180px;
+border-radius:15px;
+overflow:hidden;
+cursor:pointer;
+text-align:center;
+box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.popup{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:25px;
+border-radius:10px;
+width:300px;
+}
+
+.close{
+float:right;
+cursor:pointer;
+font-size:20px;
+}
+#menuItems{
+background-color: #d36b46;
+color: #ddd;
+padding: 15px;
+border-radius: 10px;
+width: 250px;
+}
+
+#menuItems li{
+padding: 4px;
+font-size: 16px;
+}
+
+#menuTitle{
+color: #be522b;
+}
+#subMenu{
+background-color:#d36b46;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
+}
+#subMenu li{
+color:#333;
+font-size:17px;
+padding:4px;
+}
+.add-btn{
+background-color:#ccc;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.add-btn:hover{
+background-color:#28a745;
+}
+/* } */
+        /* --- About Section --- */
+        #about { background-color: white; padding: 5rem 5%; display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-image { flex: 1; min-width: 300px; }
+        .about-image img { width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .about-text h2 { font-size: 2.5rem; color: #222; margin-bottom: 1rem; font-family: 'Georgia', serif;}
+
+        /* --- Footer --- */
+        footer { background-color: #222; color: white; text-align: center; padding: 2rem 5%; }
+
+        /* --- Cart & Payment Modal --- */
+        #cart-sidebar {
+            position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
+            background: white; box-shadow: -4px 0 10px rgba(0,0,0,0.2); padding: 20px;
+            transition: 0.3s; z-index: 200; display: flex; flex-direction: column;
+        }
+        #cart-sidebar.open { right: 0; }
+        .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: red; align-self: flex-end; }
+        .cart-items { flex-grow: 1; overflow-y: auto; margin-top: 15px; }
+        .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 10px 0; }
+        .cart-total { font-size: 1.5rem; font-weight: bold; margin: 20px 0; text-align: right; }
+        .checkout-btn { background-color: var(--success-color); color: white; border: none; padding: 15px; font-size: 1.2rem; cursor: pointer; width: 100%; border-radius: 5px; }
+
+        #payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 300; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 400px; text-align: center; }
+        .payment-options { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+        .pay-btn { padding: 12px; background: #eee; border: 1px solid #ccc; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: 0.3s;}
+        .pay-btn:hover { background: var(--secondary-color); color: white; border-color: var(--secondary-color); }
+        .social-icons {
+  margin-top: 20px;
+  text-align: center;
+}.social-icons a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+
+  border: 2px solid white;
+  border-radius: 50%;
+
+  color: white;
+  font-size: 24px;
+
+  transition: 0.3s;
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">SHUDDHAM BHOJ CAFE & RESTAURENT</div>
+        <div class="nav-container">
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+        </div> </header>
+ <section id="home">
+      
+<div style="text-align: center;">
+  <img src="Brown_Simple_Cute_Catering_Logo-removebg-preview.png" height="400">
+</div><div>
+        <h1></h1>
+        <div style="color: #b55a39;"><p>TASTE OF PURITY AT YOUR DOOR STEP.</div></p>
+        <a href="#menu" class="hero-btn">Explore Menu</a>
+        </div>
+    </section>
+
+    <div class="search-container" id="menu">
+        <input type="text" id="search-bar" placeholder="Search of your choice ,juice,chaats,spicy..." onkeyup="searchMenu()">
+    </div>
+ <section class="menu-wrapper">
+        <div  style="text-align: center;">
+            <div style="color: #b55a39;"></div> 
+        </div>
+<div class="menu-container">
+<section class="menu-section">
+
+<div class="menu-text">
+
+<img src="cat.png" height="280"></div>
+<div class="cards">
+
+<div class="card" onclick="openMenu('nashta')">
+<img src="nashta.png">
+<h3>Special chai nashta</h3>
+<p>Packed with flavour</p>
+</div>
+
+<div class="card" onclick="openMenu('paratha')">
+<img src="paratha.png">
+<h3>Paratha house</h3>
+<p>Paired with chutneys</p>
+</div>
+
+<div class="card" onclick="openMenu('chaat')">
+<img src="panipuri.png">
+<h3>Street food love..</h3>
+<p>Spicy,Tangy,crunchy.....</p>
+</div>
+
+<div class="card" onclick="openMenu('FastFood')">
+<img src="FastFood.png">
+
+<h3>Chinese Delight</h3>
+<p>Spice up with chinese...</p>
+</div>
+
+<div class="card" onclick="openMenu('traditional food ')">
+<img src="traditional.png">
+<h3>Special thali</h3>
+<p>Packed with flavour</p>
+</div>
+
+<div class="card" onclick="openMenu('juice&shakes')">
+<img src="juice.png">
+<h3>Fresh & Fruity</h3>
+<p>Shake up your day...</p>
+</div>
+
+
+<div class="popup" id="menuPopup">
+
+<span class="close" onclick="closeMenu()">X</span>
+
+<!-- <body> -->
+
+
+<h2 id="menuTitle"></h2>
+<ul id="menuItems"></ul>
+<ul id="subMenu"></ul>
+
+<!-- </body> -->
+</div>
+<script>
+    function openMenu(type){
+
+let title=document.getElementById("menuTitle");
+let items=document.getElementById("menuItems");
+let sub = document.getElementById("subMenu");
+
+sub.innerHTML="";
+
+if(type=="nashta"){
+title.innerHTML="nashta Menu";
+items.innerHTML="<li>chai/- ₹10<button class='add-btn' onclick=\"addToCart('chai',10)\">+</button></li>"+"<li>chai/- ₹10<button class='add-btn' onclick=\"addToCart('chai',10)\">+</button></li>"+"<li>chai/- ₹10<button class='add-btn' onclick=\"addToCart('chai',10)\">+</button></li>";
+}
+
+
+if(type=="paratha"){
+title.innerHTML="Paratha Corner";
+items.innerHTML="<li>Plain Paratha/सादा पराठा - ₹15<button class='add-btn' onclick=\"addToCart('Plain Paratha',15)\">+</button></li>"+"<li>Aloo Paratha/आलू पराठा - ₹20<button class='add-btn' onclick=\"addToCart('Aloo Paratha',20)\">+</button></li>"+
+"<li>Sev Paratha/सेव पराठा - ₹30 <button  class='add-btn'onclick=\"addToCart('Sev Paratha',30)\">+</button></li>"+
+"<li>Gobhi Paratha/गोभी पराठा - ₹30<button class='add-btn' onclick=\"addToCart('Gobhi Paratha',30)\">+</button></li>"+
+"<li>Methi Paratha/ मेथी पराठा - ₹30<button class='add-btn' onclick=\"addToCart('Methi Paratha',30)\">+</button></li>"+
+"<li>Pyaaz Paratha/प्याज पराठा - ₹30<button class='add-btn' onclick=\"addToCart('Pyaaz Paratha',30)\">+</button></li>"+
+"<li>Paneer Paratha/पनीर पराठा - ₹40<button class='add-btn' onclick=\"addToCart('Paneer Paratha',40)\">+</button></li>"+
+"<li>Special Mix Paratha/स्पेशल मिक्स पराठा - ₹50 <button class='add-btn' onclick=\"addToCart('Special Mix Paratha',50)\">+</button></li>";
+}
+
+if(type=="chaat"){
+title.innerHTML="Chaat Corner";
+items.innerHTML="<li>panipuri - ₹20 <button class='add-btn' onclick=\"addToCart('panipuri',20)\">+</button></li>"
++"<li>dahipuri - ₹20 <button class='add-btn' onclick=\"addToCart('dahipuri',20)\">+</button></li>"
++"<li>sev puri - ₹20 <button class='add-btn' onclick=\"addToCart('sevpuri',20)\">+</button></li>"
++"<li>chole tikki - ₹30 <button class='add-btn' onclick=\"addToCart('chole tikki',30)\">+</button></li>"
++"<li>hot dog - ₹30 <button class='add-btn' onclick=\"addToCart('hot dog',30)\">+</button></li>"
++"<li>bhel puri - ₹30 <button class='add-btn' onclick=\"addToCart('bhel puri',30)\">+</button></li>";
+}
+
+if(type=="FastFood"){
+title.innerHTML="FastFood ";
+items.innerHTML=
+"<li onclick='showNoodles()'>Noodles</li>"
++"<li onclick='showManchurine()'>Manchurine</li>"
++"<li onclick='showMomos()'>Momos</li>"
++"<li onclick='showSandwich()'>Sandwich</li>"
++"<li onclick='showMaggie()'>Maggie</li>"
++"<li onclick='showPasta()'>Pasta</li>";
+}
+
+if(type=="Traditional Food "){
+title.innerHTML="Thali Menu";
+items.innerHTML="<li>Roti</li><li>Sabji Roti</li><li>Sabji puri</li><li>Dal bati</li>";
+}
+
+if(type=="juice&shakes"){
+title.innerHTML="juice&shakes Menu";
+items.innerHTML=
+"<li>pineapple juice - ₹40 <button class='add-btn' onclick=\"addToCart('pineapple juice', 40)\">+</button></li>"+
+"<li>mousambi juice - ₹50  <button class='add-btn' onclick=\"addToCart('mousambi juice', 50)\">+</button></li>"+
+"<li>orange juice - ₹50  <button class='add-btn' onclick=\"addToCart('orange juice', 50)\">+</button></li>"+
+"<li>pomogranet juice - ₹60  <button class='add-btn' onclick=\"addToCart('pomogranet juice', 60)\">+</button></li>"+
+"<li>watermelon juice - ₹40 <button class='add-btn' onclick=\"addToCart('watermelon juice', 40)\">+</button></li>"+
+"<li>beetroot juice - ₹50  <button class='add-btn' onclick=\"addToCart('beetroot juice', 50)\">+</button></li>"+
+"<li>mix juice - ₹60  <button class='add-btn' onclick=\"addToCart('mix juice', 60)\">+</button></li>";
+}
+
+document.getElementById("menuPopup").style.display="block";
+
+    }
+function showNoodles(){
+let sub = document.getElementById("subMenu");
+
+
+sub.innerHTML=
+"<li>Veg Noodles - ₹60 <button class='add-btn' onclick=\"addToCart('Veg Noodles',60)\">+</button></li>"+
+"<li>Hakka Noodles -  <button class='add-btn' onclick=\"addToCart('Hakka Noodles',60)\">+</button></li>"+
+"<li>Schezwan Noodles - <button class='add-btn' onclick=\"addToCart('Schezwan Noodles',120)\">+</button></li>"+
+"<li>Paneer Noodles - <button class='add-btn' onclick=\"addToCart('Paneer Noodles',120)\">+</button></li>";
+}
+function showManchurine(){
+let sub = document.getElementById("subMenu");
+
+
+sub.innerHTML=
+"<li>Veg Manchurian - ₹60 <button class='add-btn' onclick=\"addToCart('Veg Manchurian',60)\">+</button></li>"+
+"<li>Grevy Manchurian -  <button class='add-btn' onclick=\"addToCart('Grevy Manchurian',60)\">+</button></li>"+
+"<li>Fry Manchurian - <button class='add-btn' onclick=\"addToCart('Fry Manchurian',120)\">+</button></li>"+
+"<li>Paneer Noodles - <button class='add-btn' onclick=\"addToCart(' Noodles',120)\">+</button></li>";
+
+}
+
+function closeMenu(){
+document.getElementById("menuPopup").style.display="none";
+}
+    
+</script>
+
+    </section>
+
+    <section id="about">
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=2070&auto=format&fit=crop" alt="Cafe Interior">
+        </div>
+        <div class="about-text">
+            <h2>Our Story</h2>
+        <p>
+            Welcome to the culinary world of Piyush Saraf, where tradition meets taste.
+Our cafe is a one-stop destination for food lovers who crave authenticity and variety. We take pride in serving a wide array of flavors, ranging from the comforting crunch of South Indian classics and Traditional Indian meals to refreshing Fresh Juices and healthy breakfast options.
+We understand the value of a home-cooked meal, which is why our dedicated Tiffin Centre provides nutritious and delicious food for those living away from home. For the street-food lovers, our Pani Puri stall offers that perfect, tangy burst of flavor, prepared with the highest standards of hygiene and love.
+Founded and managed by Piyush Saraf, our mission is to provide high-quality, flavorful food that satisfies every palate—whether you're stopping by for a quick snack, a healthy juice, or a full traditional meal.
+Taste the tradition, feel the warmth.
+        </p>
+        
+        
+ </div>
+        
+    </section>
+
+    <footer>
+        <p>📍 1637/18,nanda nagar teen puliya road near sugnidevi college ,indore </p>
+        <p style="font-size: 0.9rem; color: #aaa; margin-top: 10px;">&copy; 2026 SHUDDHAM BHOJ CAFE & RESTAURENT. All Rights Reserved.</p>
+        <div class="social-icons">
+  
+  <a href="https://wa.me/917746900518" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://instagram.com/shuddham_bhoj_03" target="_blank">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://facebook.com/yourpage" target="_blank">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+</div>
+    </footer>
+
+    <div id="cart-sidebar">
+        <button class="close-cart" onclick="toggleCart()">✖</button>
+        <h2 style="margin-bottom: 10px; border-bottom: 2px solid #ddd; padding-bottom: 10px;">Your Cart</h2>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-total">Total: ₹<span id="total-price">0</span></div>
+        <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+
+    <div id="payment-modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 15px;">Complete Payment</h2>
+            <p>Total Amount: <strong style="font-size: 1.2rem; color: var(--success-color);">₹<span id="pay-amount">0</span></strong></p>
+            <div class="payment-options">
+                <button class="pay-btn" onclick="processPayment('UPI')">Pay via UPI (GPay / PhonePe)</button>
+                <button class="pay-btn" onclick="processPayment('Card')">Credit / Debit Card</button>
+                <button class="pay-btn" onclick="processPayment('Cash')">Cash on Delivery</button>
+            </div>
+            <button class="pay-btn" style="background: white; border: none; color: red;" onclick="closeCheckout()">Cancel</button>
+        </div>
+        <div id="successMsg" style="
+  display:none;
+  color:white;
+  background:green;
+  padding:10px;
+  border-radius:8px;
+  text-align:center;
+  margin:20px;
+">
+  🎉 Order Placed Successfully!
+</div>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(itemName, itemPrice) {
+            cart.push({ name: itemName, price: itemPrice });
+            total += itemPrice;
+            updateCartUI();
+            //backend call
+            fetch("http://localhost:5000/order", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: itemName,
+            price: itemPrice
+        })
+    })
+    .then(res => res.text())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+}
+
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('total-price').innerText = total;
+            document.getElementById('pay-amount').innerText = total;
+
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = ''; 
+
+            cart.forEach((item, index) => {
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <span style="font-weight: 500;">${item.name}</span>
+                        <span>₹${item.price} <button onclick="removeItem(${index})" style="color:red; border:none; background:none; cursor:pointer; margin-left:10px; font-weight: bold;">X</button></span>
+                    </div>
+                `;
+            });
+        }
+
+        function removeItem(index) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('open'); }
+
+        function openCheckout() {
+            if(cart.length === 0) return alert("Your cart is empty!");
+            document.getElementById('payment-modal').style.display = 'flex';
+            toggleCart(); 
+        }
+
+        function closeCheckout() { document.getElementById('payment-modal').style.display = 'none'; }
+
+        function processPayment(method) {
+
+    alert(`Payment Successful via ${method} ✅`);
+
+    // 🔥 SAVE ORDER TO DATABASE
+    fetch("http://localhost:5000/order", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            cart: cart,
+            total: total
+        })
+    })
+    .then(res => res.text())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+
+    // reset cart
+    cart = [];
+    total = 0;
+    updateCartUI();
+    closeCheckout();
+} 
+
+        function searchMenu() {
+            let input = document.getElementById('search-bar').value.toLowerCase();
+            let categories = document.querySelectorAll('.category-title');
+            let grids = document.querySelectorAll('.menu-grid');
+
+            grids.forEach((grid, index) => {
+                let items = grid.querySelectorAll('.menu-item');
+                let categoryHasVisibleItem = false;
+
+                items.forEach(item => {
+                    let itemName = item.querySelector('.item-name').innerText.toLowerCase();
+                    if (itemName.includes(input)) {
+                        item.style.display = 'flex';
+                        categoryHasVisibleItem = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (categoryHasVisibleItem) {
+                    categories[index].style.display = 'block';
+                    grid.style.display = 'grid';
+                } else {
+                    categories[index].style.display = 'none';
+                    grid.style.display = 'none';
+                }
+            });
+        }
+
+function updateCart(){
+
+document.getElementById("cart-count").innerText=cart.length;
+document.getElementById("total").innerText=total;
+
+}
+
+</script>
+    <div class="popup" id="menuPopup">
+
+<span class="close" onclick="closeMenu()">X</span>
+
+<h2 id="menuTitle"></h2>
+
+<ul id="menuItems"></ul>
+
+</div>
+
+</body>
+</html>
